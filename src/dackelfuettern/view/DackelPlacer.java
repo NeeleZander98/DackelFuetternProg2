@@ -210,4 +210,15 @@ public class DackelPlacer extends JPanel {
         	this.buttonNextPlayer.setEnabled(true);
         } 
     }
+    
+    public int[] getPlacedDackel() {
+        int[] dackel = new int[4];
+
+        dackel[0] = 1 - this.countTwo;
+        dackel[1] = 1 - this.countThree;
+        dackel[2] = 1 - this.countFour;
+        dackel[3] = 1 - this.countFive;
+
+        return dackel;
+    }
 }

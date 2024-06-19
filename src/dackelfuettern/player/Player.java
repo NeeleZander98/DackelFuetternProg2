@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import dackelfuettern.Game;
 import dackelfuettern.view.DackelPlacer;
+import dackelfuettern.view.DackelShower;
 import dackelfuettern.view.Playground;
 
 
@@ -14,6 +15,7 @@ public class Player extends JPanel {
 	
 	private final DackelPlacer dackelPlacer;
     private final Playground   playground;
+    private final DackelShower dackelShower;
 
     public Player(Game game, int id) {
         //Spieler erstellen und mit nötigen Funktionen ausstaten
@@ -23,6 +25,7 @@ public class Player extends JPanel {
 
          this.playground = new Playground(this, game, id);
          this.dackelPlacer = new DackelPlacer(id, game);
+         this.dackelShower = new DackelShower(game, id);
 
          add(this.playground);
          add(this.dackelPlacer);
@@ -39,5 +42,9 @@ public class Player extends JPanel {
 
     public void prepareGame() {
         remove(dackelPlacer);
+    }
+    
+    public DackelShower getDackelShower() {
+        return dackelShower;
     }
 }
