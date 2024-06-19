@@ -30,6 +30,12 @@ public class DackelPlacerActions implements ActionListener {
         	System.out.println("Alle Dackel vom Spieler gesetzt - wechsle zum nächsten Spieler.");
             this.game.pauseGame(this.id);
             this.game.getCurrentPlayer(this.id).prepareGame();
+            this.game.setClicks(this.game.getClicks() + 1);
+        }
+        
+        if (this.game.getClicks() == 2) {
+        	System.out.println("Beide Spieler haben alle Dackel gesetzt - starte das Spiel.");
+        	this.game.startGame();
         }
 
     }

@@ -31,7 +31,7 @@ public class Playground extends JPanel {
         this.game = game;
         this.player = player;
 
-        ButtonActions listener = new ButtonActions(game, player);
+        ButtonActions listener = new ButtonActions(game, player, id);
         //Erstellung der Buttons
         for (int y = 0; y < buttons.length; y++)
             for (int x = 0; x< buttons[y].length; x++) {
@@ -83,8 +83,16 @@ public class Playground extends JPanel {
         this.markAllOwnDackel();
     }
 
-    public void setButtonIcon(int y, int x) {
-        buttons[y][x].setIcon(new ImageIcon("src/dackelfuettern/assets/smallhundi.png"));
+    public void setButtonIcon(int y, int x, String icon) {
+    	if(icon == "dackel") {
+    		buttons[y][x].setIcon(new ImageIcon("src/dackelfuettern/assets/smallhundi.png"));
+    	}
+        else if (icon == "lecki") {
+        	buttons[y][x].setIcon(new ImageIcon("src/dackelfuettern/assets/hundelecki.png"));
+        }
+        else if (icon == "foundDackel") {
+         	buttons[y][x].setIcon(new ImageIcon("src/dackelfuettern/assets/happydackel.png"));
+         }
         this.game.pack();
     }
     //Zum markieren eigener Dackel auf dem Spielfeld
@@ -93,9 +101,21 @@ public class Playground extends JPanel {
         for (int x = 1; x < this.buttons.length; x++)
             for (int y = 1; y < this.buttons[x].length; y++)
                 if (this.dackel[y - 1][x - 1] != 0)
-                    setButtonIcon(y, x);
+                    setButtonIcon(y, x, "dackel");
+    }
+    
+    public int[][] getDackel() {
+        return this.dackel;
     }
 
+    public void setDackel(int[][] dackel) {
+        this.dackel = dackel;
+    }
+
+
+    public int getCord( int y, int x ) {
+        return dackel[y][x];
+    }
 
     public boolean isPlaceable(int y, int x, int dackelSize) {
 
@@ -111,6 +131,24 @@ public class Playground extends JPanel {
             return false;
         
 		return placeable;
+    }
+    
+    public void changeButton(int y, int x, boolean status) {
+        buttons[y][x].setEnabled(status);
+    }
+    
+    public HashMap<Integer, Integer> getDackelSize() {
+        return dackelIDSize;
+    }
+
+    public void setDackelSize( HashMap<Integer, Integer> dackelIDSize ) {
+        this.dackelIDSize = dackelIDSize;
+    }
+    
+    public void activateDackel() {
+        for (int y = 1; y < buttons.length; y++)
+            for (int x = 1; x < buttons[y].length; x++)
+                buttons[x][y].setEnabled(true);
     }
 
 }

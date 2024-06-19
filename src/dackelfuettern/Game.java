@@ -14,6 +14,7 @@ public class Game extends JFrame {
 	private Player player1;
 	private Player player2;
 	private Pause pause;
+	private int clicks = 0;
 	private String status = "setDackel";
 
 	public Game() {
@@ -73,9 +74,36 @@ public class Game extends JFrame {
 	            this.pause.setVisible(false);
 	        }
 	    }
+	    
+	    public void startGame() {
+
+	        int[][] tempDackel = player1.getPlayground().getDackel();
+
+	        player1.getPlayground().setDackel( player2.getPlayground().getDackel() );
+	        player2.getPlayground().setDackel( tempDackel);
+
+	        HashMap<Integer, Integer> tempIDSize = player1.getPlayground().getDackelSize();
+
+	        player1.getPlayground().setDackelSize( player2.getPlayground().getDackelSize() );
+	        player2.getPlayground().setDackelSize( tempIDSize );
+
+	        player1.getPlayground().activateDackel();
+	        player2.getPlayground().activateDackel();
+
+	        player1.getDackelShower().setDackelLeft( player2.getDackelPlacer().getPlacedDackel() );
+	        player2.getDackelShower().setDackelLeft( player1.getDackelPlacer().getPlacedDackel() );
+
+	        setStatus("fuettern");
+
+	        System.out.println( "Game-Status: " + getStatus());
+	    }
 
 	    public String getStatus() {
 	        return status;
+	    }
+	    
+	    public void setStatus(String status) {
+	        this.status = status;
 	    }
 
 	    public Player getCurrentPlayer(int id) {
@@ -86,6 +114,14 @@ public class Game extends JFrame {
 	        else {
 	        	return player2;
 	        }
+	    }
+	    
+	    public int getClicks() {
+	        return clicks;
+	    }
+
+	    public void setClicks(int clicks) {
+	        this.clicks = clicks;
 	    }
 
 }
