@@ -3,6 +3,14 @@
 The ship sinking game has been modified so that dachshund are fed.
 
 ## Description
+How to Play:
+
+At the beginning, Player 1's game board is displayed,
+where they have the opportunity to place 5 dachshunds.
+After placing them, a pause screen appears,
+allowing the option to continue the game online later.
+Once Player 2 has placed their dachshunds,
+players can click on the other player's dachshunds.
 
 Mainly used in this project:
 
