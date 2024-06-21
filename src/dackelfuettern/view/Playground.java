@@ -130,7 +130,7 @@ public class Playground extends JPanel {
         if (!placeable)
             return false;
         
-		return placeable;
+		return isValidPlace(y, x, dackelSize);
     }
     
     public void changeButton(int y, int x, boolean status) {
@@ -149,6 +149,52 @@ public class Playground extends JPanel {
         for (int y = 1; y < buttons.length; y++)
             for (int x = 1; x < buttons[y].length; x++)
                 buttons[x][y].setEnabled(true);
+    }
+
+    public void removeBlocked() {
+        for(JButton[] buttons : buttons) {
+            for(JButton button: buttons) {
+                button.setIcon(null);
+            }
+        };
+        markAllOwnDackel();
+    }
+
+    public boolean isValidPlace(int y, int x, int dackelSize) {
+        int startPosX;
+        int startPosY;
+        int endPosX;
+        int endPosY;
+
+        if(player.getDackelPlacer().isHorizontal()) {
+            startPosX = (x <= 0) ? x : x - 1;
+            startPosY = (y <= 0) ? y : y - 1;
+            endPosX = (x + dackelSize + 1 < dackel[y].length + 1) ? x + dackelSize + 1 : x + dackelSize - 1;
+            endPosY = (y - dackelSize < dackel.length + 1) ? y + 1 : y -1;
+        }
+        else {
+            startPosX = (x <= 0) ? x : x - 1;
+            startPosY = (y - dackelSize >= 0) ? y - dackelSize : y - 1;
+            endPosX = (x < dackel[y].length + 1) ? x + 1 : x - 1;
+            endPosY = (y - dackelSize < dackel.length + 1) ? y + 1 : y - 1;
+        }
+
+        if(endPosY >= 17) {
+            endPosY = 16;
+        }
+        if ( endPosX >= 17) {
+            endPosX = 16;
+        }
+
+        for(int xNum = startPosX; xNum <= endPosX; xNum ++) {
+            for(int yNum = startPosY; yNum <= endPosY; yNum ++) {
+                if(dackel[yNum][xNum] != 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
 }

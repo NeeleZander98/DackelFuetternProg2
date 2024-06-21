@@ -1,7 +1,7 @@
 package dackelfuettern.view;
 
 
-import java.awt.Dimension;
+import java.awt.*;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -27,6 +27,18 @@ public class DackelShower extends JPanel {
         this.game = game;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setMinimumSize( new Dimension(game.getWidth(), game.getHeight()));
+
+        setBackground((id == 1) ? Color.decode("0xcccc00") : Color.decode("0x00cc00"));
+
+        lFive.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lFour.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lThree.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lTwo.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        lFive.setFont(new Font("Dialog", Font.PLAIN, 25));
+        lFour.setFont(new Font("Dialog", Font.PLAIN, 25));
+        lThree.setFont(new Font("Dialog", Font.PLAIN, 25));
+        lTwo.setFont(new Font("Dialog", Font.PLAIN, 25));
 
         add(this.lTwo);
         add(this.lThree);
