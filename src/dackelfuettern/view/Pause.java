@@ -1,8 +1,6 @@
 package dackelfuettern.view;
 
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import java.awt.Image;
+import java.awt.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,7 +14,9 @@ public class Pause extends JPanel {
 //Erstellung eines Pausenbildschirms zwischen den beiden Spielern
 	public Pause(Game game) {
 		System.out.println("Erstelle Pause Anzeige für Spielerwechsel");
-		
+
+		GridBagConstraints cons = new GridBagConstraints();
+
 		setMinimumSize(new Dimension(game.getWidth(), game.getHeight()));
 		setVisible(true);
 		setLayout(new GridBagLayout());
@@ -31,10 +31,19 @@ public class Pause extends JPanel {
 		
 		resume.addActionListener(new PauseActions(game));
         resume.setActionCommand("resume");
+
+		cons.gridx = 0;
+		cons.gridy = 0;
         
-        add(view);
-        add(title);
-        add(resume);
+        add(view, cons);
+
+		cons.gridx = 0;
+		cons.gridy++;
+        add(title, cons);
+
+		cons.gridx = 0;
+		cons.gridy++;
+        add(resume, cons);
 	}
 
 }

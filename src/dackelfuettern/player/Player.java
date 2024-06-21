@@ -1,7 +1,6 @@
 package dackelfuettern.player;
 
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
+import java.awt.*;
 
 import javax.swing.JPanel;
 
@@ -16,6 +15,7 @@ public class Player extends JPanel {
 	private final DackelPlacer dackelPlacer;
     private final Playground   playground;
     private final DackelShower dackelShower;
+    private final GridBagConstraints cons = new GridBagConstraints();
 
     public Player(Game game, int id) {
         //Spieler erstellen und mit nötigen Funktionen ausstaten
@@ -27,8 +27,17 @@ public class Player extends JPanel {
          this.dackelPlacer = new DackelPlacer(id, game);
          this.dackelShower = new DackelShower(game, id);
 
+         cons.gridx = 0;
+         cons.gridy = 0;
+         cons.fill = GridBagConstraints.BOTH;
+
+         cons.weightx = 1;
+         cons.weighty = 1;
+
          add(this.playground);
-         add(this.dackelPlacer);
+
+         cons.gridy++;
+         add(this.dackelPlacer, cons);
     }
 
     public Playground getPlayground() {
@@ -41,7 +50,10 @@ public class Player extends JPanel {
 
 
     public void prepareGame() {
+
         remove(dackelPlacer);
+        add(dackelPlacer, cons);
+        playground.removeBlocked();
     }
     
     public DackelShower getDackelShower() {

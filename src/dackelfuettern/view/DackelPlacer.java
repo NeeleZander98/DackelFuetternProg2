@@ -1,6 +1,6 @@
 package dackelfuettern.view;
 
-import java.awt.Dimension;
+import java.awt.*;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -70,7 +70,6 @@ public class DackelPlacer extends JPanel {
 	   this.buttonNextPlayer.setMinimumSize(new Dimension(100, 100));
 	   this.buttonNextPlayer.setActionCommand("next");
 	   this.buttonNextPlayer.addActionListener(listener);
-       
 	   this.buttonNextPlayer.setFocusable(false);
 	   this.buttonNextPlayer.setEnabled(false);
 
